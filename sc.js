@@ -1,3 +1,12 @@
+  /**
+     * Universidad - Facultad de Ingeniería
+     * Asignatura: Introducción a la Computación Gráfica
+     * Parcial 2: Sistema de Dispersión Geométrica Orbital
+     *
+     * Algoritmos implementados:
+     *   - Punto Medio para Circunferencias (órbita)
+     *   - Bresenham para Líneas (lados de polígonos)
+     */
 const canvas = document.getElementById("Canvas");
 const ctx = canvas.getContext("2d");
 
@@ -39,8 +48,14 @@ function midpoint(cx, cy, r,color="999") {
     }
 }
 
-function getOrbitalPosition(cx, cy, R, r, d, t) {
-    const x = cx + (R - r) * Math.cos(t) + d * Math.cos(((R - r) / r) * t);
-    const y = cy + (R - r) * Math.sin(t) - d * Math.sin(((R - r) / r) * t);
-    return { x, y };
+function getOrbitalPosition(r, n) {
+    let position = [];  
+    for (let i = 0; i < n; i++) {
+        let angle = (2 * Math.PI / i) *n ; 
+        let x = centerX + r * Math.cos(angle);
+        let y = centerY + r * Math.sin(angle);
+        position.push({ x, y });
+    }
+    return position;
 }
+
