@@ -47,15 +47,13 @@ function midpoint(cx, cy, r,color="999") {
         }
     }
 }
-
 function getOrbitalPosition(r, n) {
     let position = [];  
     for (let i = 0; i < n; i++) {
-        let angle = (2 * Math.PI / i) *n ; 
+        let angle = (2 * Math.PI / n) *i; 
         let x = centerX + r * Math.cos(angle);
         let y = centerY + r * Math.sin(angle);
         position.push({ x, y });
     }
     return position;
 }
-
