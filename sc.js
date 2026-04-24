@@ -7,15 +7,19 @@
      *   - Punto Medio para Circunferencias (órbita)
      *   - Bresenham para Líneas (lados de polígonos)
      */
-const canvas = document.getElementById("Canvas");
+const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 const centerX = canvas.width / 2;
 const centerY = canvas.height / 2;
 
-const R=Math.floor = (Math.random()*100) +150;
-const r=Math.floor = (Math.random()*7) +4;
-const d=Math.floor = (Math.random()*5) +3;
+function getRandomConfig() {
+    return {
+        R: Math.floor(Math.random() * 100) + 150,
+        n: Math.floor(Math.random() * 7) + 4,
+        k: Math.floor(Math.random() * 5) + 3
+    };
+}
  
 //la funcion obligatoria que puso el profe 
 function plotPixel(ctx, x, y,color="000") {
@@ -93,4 +97,13 @@ function getOrbitalPosition(r, n) {
             Bresenham(start.x, start.y, end.x, end.y,color);
         }
     }
-    
+ function getOrbitalPosition(r, n) {
+    let position = [];  
+    for (let i = 0; i < n; i++) {
+        let angle = (2 * Math.PI / i) *n ; 
+        let x = centerX + r * Math.cos(angle);
+        let y = centerY + r * Math.sin(angle);
+        position.push({ x, y });
+    }
+    return position;
+}
