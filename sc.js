@@ -38,3 +38,9 @@ function midpoint(cx, cy, r,color="999") {
         }
     }
 }
+
+function getOrbitalPosition(cx, cy, R, r, d, t) {
+    const x = cx + (R - r) * Math.cos(t) + d * Math.cos(((R - r) / r) * t);
+    const y = cy + (R - r) * Math.sin(t) - d * Math.sin(((R - r) / r) * t);
+    return { x, y };
+}
