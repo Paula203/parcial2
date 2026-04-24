@@ -57,3 +57,31 @@ function getOrbitalPosition(r, n) {
     }
     return position;
 }
+ function getPolygonVertices(cx, cy, radius, sides) {
+    let vertices = [];
+    for (let i = 0; i < sides; i++) {
+        let angle = (2 * Math.PI / sides) * i;
+        let x = cx + radius * Math.cos(angle);
+        let y = cy + radius * Math.sin(angle);
+        vertices.push({ x, y });
+    }
+    //se implementa ek algoritmo de bresenham para dibujar las lineas entre los vertices del poligono
+    function Bresenham(x0, y0, x1, y1,color="999") {
+        let dx = Math.abs(x1 - x0);
+        let dy = Math.abs(y1 - y0);
+        let sx = (x0 < x1) ? 1 : -1;
+        let sy = (y0 < y1) ? 1 : -1;
+        let err = dx - dy;
+         while (true) {
+            plotPixel(ctx, x0, y0,color);
+            if (x0 === x1 && y0 === y1) break;
+            let err2 = err * 2; 
+            if (err2 > -dy) {
+                err -= dy;
+                x0 += sx;
+            }
+            if (err2 < dx) {
+                err += dx;
+                y0 += sy;
+            }
+        }
