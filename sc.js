@@ -13,3 +13,28 @@ function plotPixel(ctx, x, y,color="000") {
     ctx.fillStyle = color;
     ctx.fillRect(Math.floor(x), Math.floor(y), 1, 1);
 }
+
+function midpoint(cx, cy, r,color="999") {
+    let x = 0;
+    let y = r;
+    let d = 1 - r; 
+
+    while (x <= y) {
+        plotPixel(ctx, cx + x, cy + y,color);
+        plotPixel(ctx, cx - x, cy + y,color);
+        plotPixel(ctx, cx + x, cy - y,color);
+        plotPixel(ctx, cx - x, cy - y,color);
+        plotPixel(ctx, cx + y, cy + x,color);
+        plotPixel(ctx, cx - y, cy + x,color);
+        plotPixel(ctx, cx + y, cy - x,color);
+        plotPixel(ctx, cx - y, cy - x,color);
+
+        x++; 
+        if (d < 0) {
+            d = d + 2 * x + 1; 
+        }   else {  
+            y--;
+            d =d+ 2 * (x - y) + 1; 
+        }
+    }
+}
