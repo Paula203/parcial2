@@ -85,3 +85,12 @@ function getOrbitalPosition(r, n) {
                 y0 += sy;
             }
         }
+    }
+    function drawPolygon(vertices,color="000") {
+        for (let i = 0; i < vertices.length; i++) {
+            let start = vertices[i];
+            let end = vertices[(i + 1) % vertices.length]; 
+            Bresenham(start.x, start.y, end.x, end.y,color);
+        }
+    }
+    
