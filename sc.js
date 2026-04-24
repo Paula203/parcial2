@@ -20,8 +20,6 @@ function getRandomConfig() {
         k: Math.floor(Math.random() * 5) + 3
     };
 }
- 
-//la funcion obligatoria que puso el profe 
 function plotPixel(ctx, x, y,color="000") {
     ctx.fillStyle = color;
     ctx.fillRect(Math.floor(x), Math.floor(y), 1, 1);
@@ -90,20 +88,23 @@ function getOrbitalPosition(r, n) {
             }
         }
     }
-    function drawPolygon(vertices,color="000") {
+    function drawPolygon(vertices,color="#000") {
         for (let i = 0; i < vertices.length; i++) {
             let start = vertices[i];
             let end = vertices[(i + 1) % vertices.length]; 
             Bresenham(start.x, start.y, end.x, end.y,color);
         }
     }
- function getOrbitalPosition(r, n) {
-    let position = [];  
-    for (let i = 0; i < n; i++) {
-        let angle = (2 * Math.PI / i) *n ; 
-        let x = centerX + r * Math.cos(angle);
-        let y = centerY + r * Math.sin(angle);
-        position.push({ x, y });
-    }
-    return position;
+ function generate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const config = getRandomConfig();
+    midpoint(centerX, centerY, config.R, "rgba(0,0,0,0.1)");
+    const centros = getOrbitalPosition(config.R, config.n);
+    centros.forEach(c => {
+        const v = getPolygonVertices(c.x, c.y, 20, config.k);
+        drawPolygon(v, "#4a1414");
+    });
+
+    document.getElementById("info").innerText = `Órbita R:${config.R} | Polígonos:${config.n} | Lados:${config.k}`;
 }
+generate();
