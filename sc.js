@@ -20,12 +20,12 @@ function getRandomConfig() {
         k: Math.floor(Math.random() * 5) + 3
     };
 }
-function plotPixel(ctx, x, y,color="000") {
+function plotPixel(ctx, x, y,color="#000") {
     ctx.fillStyle = color;
     ctx.fillRect(Math.floor(x), Math.floor(y), 1, 1);
 }
 
-function midpoint(cx, cy, r,color="999") {
+function midpoint(cx, cy, r,color="#999") {
     let x = 0;
     let y = r;
     let d = 1 - r; 
@@ -67,8 +67,14 @@ function getOrbitalPosition(r, n) {
         let y = cy + radius * Math.sin(angle);
         vertices.push({ x, y });
     }
+    return vertices;
+}
     //se implementa ek algoritmo de bresenham para dibujar las lineas entre los vertices del poligono
-    function Bresenham(x0, y0, x1, y1,color="999") {
+    function Bresenham(x0, y0, x1, y1,color="#999") {
+        x0 = Math.floor(x0);
+        y0 = Math.floor(y0);
+        x1 = Math.floor(x1);
+        y1 = Math.floor(y1);
         let dx = Math.abs(x1 - x0);
         let dy = Math.abs(y1 - y0);
         let sx = (x0 < x1) ? 1 : -1;
